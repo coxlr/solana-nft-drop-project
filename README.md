@@ -1,1 +1,1 @@
-# # Solana NFT Drop Project
+# Solana NFT Drop Project
