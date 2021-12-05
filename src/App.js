@@ -86,10 +86,8 @@ const App = () => {
           <p className="sub-text">
             A Solana NFT Collection of randomly generated Technicolor Penguins
           </p>
-          {/* Add the condition to show this only if we don't have a wallet address */}
           {!walletAddress && renderNotConnectedContainer()}
         </div>
-        {/* Check for walletAddress and then pass in walletAddress */}
         {walletAddress && <CandyMachine walletAddress={window.solana} />}
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />

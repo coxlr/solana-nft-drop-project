@@ -377,27 +377,38 @@ const CandyMachine = ({ walletAddress }) => {
   };
 
   const renderMintDetails = () => {
-    return [<p>a</p>, <p>z</p>];
+    let data = (
+      <p key="minted">{`Items Minted: ${machineStats.itemsRedeemed} / ${machineStats.itemsAvailable}`}</p>
+    );
+    if (machineStats.itemsRedeemed === machineStats.itemsAvailable) {
+      return [
+        data,
+        <p key="sold-out" className="sub-text">
+          Sold Out 🙊
+        </p>,
+      ];
+    } else {
+      return [
+        data,
+        <button
+          key="mint-button"
+          className="cta-button mint-button"
+          onClick={mintToken}
+          disabled={isMinting}
+        >
+          Mint NFT
+        </button>,
+      ];
+    }
   };
 
   return (
     machineStats && (
       <div className="machine-container">
         {renderDropTimer()}
+        {new Date() >= new Date(machineStats.goLiveData * 1000) &&
+          renderMintDetails()}
 
-        <p>{`Items Minted: ${machineStats.itemsRedeemed} / ${machineStats.itemsAvailable}`}</p>
-        {/* Check to see if these properties are equal! */}
-        {machineStats.itemsRedeemed === machineStats.itemsAvailable ? (
-          <p className="sub-text">Sold Out 🙊</p>
-        ) : (
-          <button
-            className="cta-button mint-button"
-            onClick={mintToken}
-            disabled={isMinting}
-          >
-            Mint NFT
-          </button>
-        )}
         {mints.length > 0 && renderMintedItems()}
         {isLoadingMints && <p>LOADING MINTS...</p>}
       </div>
